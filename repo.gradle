@@ -1,5 +1,4 @@
 buildscript {
-
     repositories {
         mavenLocal()
         maven {
@@ -40,13 +39,6 @@ buildscript {
 }
 
 allprojects {
-    /**
-     * fix 本地  `./gradlew build` 报错:
-     * > Could not resolve all dependencies for configuration ':detachedConfiguration3'.
-     *    > Cannot resolve external dependency org.springframework.boot:spring-boot-dependencies:2.1.16.RELEASE because no repositories are defined.
-     *      Required by:
-     *          project :
-     */
     repositories {
         mavenLocal()
         maven {
