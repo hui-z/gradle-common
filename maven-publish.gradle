@@ -1,0 +1,49 @@
+allprojects {
+    apply plugin: 'maven-publish'
+
+    publishing {
+
+        task sourceJar(type: Jar) {
+            from sourceSets.main.allJava
+            classifier "sources"
+        }
+
+
+        publications {
+            mavenSnapshots(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+                artifact sourceJar
+                ext.repo = 'Dev'
+            }
+
+            mavenRelease(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+                artifact sourceJar
+                ext.repo = 'Prod'
+            }
+        }
+        repositories {
+            maven {
+                name 'Dev'
+                url "${NEXUS_URL}/repository/maven-snapshots/"
+                authentication {
+                    header(HttpHeaderAuthentication)
+                }
+                credentials(HttpHeaderCredentials) {
+                    name "Authorization"
+                    value "Basic ${NEXUS_CAS_HEADER}"
+                }
+            }
+            maven {
+                name 'Prod'
+                url "${NEXUS_URL}/repository/maven-releases/"
+            }
+        }
+    }
+}

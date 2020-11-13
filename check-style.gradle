@@ -1,13 +1,10 @@
-
-subprojects {
+allprojects {
     apply plugin: 'checkstyle'
     checkstyle {
-//        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
-        configFile = uri('https://github.com/hui-z/gradle-common/checkstyle/checkstyle.xml')
+//        configFile =
+//                file("https://zaihui-media-prod.oss-cn-shanghai.aliyuncs.com/gradle/checkstyle/checkstyle.xml")
         showViolations = true
-//        ignoreFailures = true
     }
-
     checkstyleMain {
         exclude "**/*.kt"
     }
@@ -18,7 +15,6 @@ subprojects {
     }
     pmd {
         consoleOutput = true
-//        ignoreFailures = true
         ruleSets = [
                 "java-ali-comment",
                 "java-ali-concurrent",
@@ -32,17 +28,11 @@ subprojects {
                 "java-ali-set"
         ]
         incrementalAnalysis = false
-
-//        classpath = FileCollection.
     }
-
     pmdMain {
         exclude "**/sankuai/sjst/platform/developer/**"
     }
-
 }
-
-
 test.mustRunAfter checkstyleMain, checkstyleTest
 
 

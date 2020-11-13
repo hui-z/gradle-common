@@ -80,7 +80,8 @@
     <module name="SuppressWarningsFilter"/>
 
     <module name="SuppressionFilter">
-        <property name="file" value="https://github.com/hui-z/gradle-common/checkstyle/suppressions.xml"/>
+        <property name="file"
+                  value="https://zaihui-media-prod.oss-cn-shanghai.aliyuncs.com/gradle/checkstyle/suppressions.xml"/>
     </module>
 
 
