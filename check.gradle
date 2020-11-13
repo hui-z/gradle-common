@@ -1,0 +1,50 @@
+
+subprojects {
+    apply plugin: 'checkstyle'
+    checkstyle {
+//        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+        configFile = uri()
+        showViolations = true
+//        ignoreFailures = true
+    }
+
+    checkstyleMain {
+        exclude "**/*.kt"
+    }
+
+    apply plugin: 'pmd'
+    dependencies {
+        pmd "com.alibaba.p3c:p3c-pmd:2.0.0"
+    }
+    pmd {
+        consoleOutput = true
+//        ignoreFailures = true
+        ruleSets = [
+                "java-ali-comment",
+                "java-ali-concurrent",
+                "java-ali-constant",
+                "java-ali-exception",
+                "java-ali-flowcontrol",
+                "java-ali-naming",
+                "java-ali-oop",
+                "java-ali-orm",
+                "java-ali-other",
+                "java-ali-set"
+        ]
+        incrementalAnalysis = false
+
+//        classpath = FileCollection.
+    }
+
+    pmdMain {
+        exclude "**/sankuai/sjst/platform/developer/**"
+    }
+
+}
+
+
+test.mustRunAfter checkstyleMain, checkstyleTest
+
+
+
+
